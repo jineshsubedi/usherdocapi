@@ -27,6 +27,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Type</th>
+                                    <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -37,6 +38,7 @@
                                     <tr>
                                         <td>{{$tab_data->title}}</td>
                                         <td>{{$tab_data->type}}</td>
+                                        <td>{{$tab_data->priority}}</td>
                                         <td>
                                             @if($tab_data->status=='active') 
                                                 <span class="badge badge-success">active</span>
@@ -134,6 +136,11 @@
      $(function() {
             $('#example-table').DataTable({
                 pageLength: 10,
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "targets": [3,4] },
+                    { "orderable": true, "targets": [0,1,2] }
+                ]
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
                     { "data": "name" },

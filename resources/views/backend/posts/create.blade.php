@@ -14,7 +14,12 @@
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" name="title" placeholder="Enter title name" class="form-control" required>
+                        <input type="text" name="title" placeholder="Enter title name" class="form-control" value={{old('title')}} >
+                        @if($errors->has('title'))
+                            <span class="text-danger">
+                                <strong>{{$errors->first('title')}}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     {{-- <div class="form-group">
@@ -24,12 +29,19 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" id="description" name="description" placeholder="Text description" rows=6 class="form-control"></textarea>
+                        <textarea type="text" id="description" name="description" placeholder="Text description" rows=6 class="form-control" value="{{old('description')}}"></textarea>
+                        @if($errors->has('description'))
+
+                            <span class="text-danger">
+                                {{$errors->first('description')}}
+                            </span>
+
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label for="cat_id">Category</label>
-                        <select name="cat_id" class="form-control" id="cat_id">
+                        <select name="cat_id" class="form-control" id="cat_id" value="old('cat_id')}}">
                             <option>--Select Categories--</option>
                             @foreach($parent_cats as $key=>$cats)
                                 <option value="{{$cats->id}}">{{$cats->title}}</option>
@@ -66,12 +78,22 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <input type="number" class="form-control" name="priority" placeholder="Enter number" value="{{old('priority')}}">
+                        @if($errors->has('priority'))
+                            <span class="text-danger">
+                                <strong>{{$errors->first('priority')}}</strong>
+                            </span>
+                        @endif
+                    </div>
                     
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
-                            <option>Active</option>
-                            <option>Inactive</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
 

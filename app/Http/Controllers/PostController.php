@@ -73,16 +73,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $ruls=$this->post->getRules();
+        $this->validate($request, [
+            'title'=>'string|required',
+            'status'=>'required|in:active,inactive',
+            'description'=>'nullable|string',
+            'priority'=>'required|integer',
+        ]);
+        // dd($request->all());
+
+        // $this->validate($ruls);z
+        // $request->validate($ruls);
+        // dd($ruls);
         $slug=$this->category->getSlug($request->title);
         $data = [
             'title' => $request->title,
             'description' => $request->description,
             'slug' => $slug,
+            'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->cat_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
+        // dd($data);
         \App\Models\Post::create($data);
         request()->session()->flash('success','Post successfully added');
         return redirect()->route('post.index');
@@ -110,7 +122,7 @@ class PostController extends Controller
     {
         $post = \App\Models\Post::find($id);
         $tab_ids = json_decode($post->tab_ids);
-        $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->get();
+        $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->orderBy('priority', 'asc')->get();
         return view('backend.posts.view')->with('post', $post)->with('tabs', $tabs);
 
     }
@@ -154,7 +166,12 @@ class PostController extends Controller
         //     request()->session()->flash('error','Post not found');
         //     return redirect()->route('post.index');
         // }
-        $ruls=$this->post->getRules();
+        $this->validate($request, [
+            'title'=>'string|required',
+            'status'=>'required|in:active,inactive',
+            'description'=>'nullable|string',
+            'priority'=>'required|integer',
+        ]);
         
         // $data=$request->all();
         // // dd($data);
@@ -165,10 +182,12 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'slug' => $slug,
+            'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->cat_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
+        // dd($data);
         
         // $status=$this->post->save();
         $status = \App\Models\Post::find($id)->update($data);

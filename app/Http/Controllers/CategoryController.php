@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $all_cats=$this->category->paginate(20);
+
+        $all_cats=$this->category->orderBy('priority','asc')->paginate(20);
         return view('backend.category.index')->with('category',$all_cats);
     }
 
@@ -41,7 +42,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $ruls=$this->category->getRules();
+        $this->validate($request,[
+            'title'=>'required|string',
+            'priority'=>'integer|required',
+            'status'=>'required|in:active,inactive'
+        ]);
         
         $data=$request->all();
         $data['slug']=$this->category->getSlug($request->title);
@@ -127,12 +132,8 @@ class CategoryController extends Controller
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
         }
-        $child_cat_id=$this->category->where('parent_id',$id)->pluck('id');
         $del=$this->category->delete();
         if($del){
-            if($child_cat_id->count()>0){
-                $this->category->shiftChild($child_cat_id);
-            }
             request()->session()->flash('success','Category successfully deleted');
         }
         else{

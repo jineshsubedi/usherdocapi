@@ -38,13 +38,15 @@
                                     <td></td>
 
                                     <td></td>
+                                    <td></td>
                                     <td>
-                                        <button type="button" onclick="filterByCategory()" class="btn btn-default">filter</button>
+                                        <button type="button" onclick="filterByCategory()" class="btn btn-default btn-sm">filter</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Title</th>
                                     <th>Category</th>
+                                    <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
                                     <th>Pots Tab Manager</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -61,7 +63,8 @@
                                     <tr>
 
                                         <td>{{$post_data->title}}</td>
-                                        <td>{{$post_data->cat_info->title}}</td>
+                                        <td>{{isset($post_data->cat_info) ? $post_data->cat_info->title : ''}}</td>
+                                        <td>{{$post_data->priority}}</td>
                                         <td><a href="{{route('post.show', $post_data->id)}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
                                         <td>
                                             @if($post_data->status=='active') 
@@ -175,6 +178,11 @@
      $(function() {
             $('#post-table').DataTable({
                 pageLength: 10,
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "targets": [3,4,5] },
+                    { "orderable": true, "targets": [0,1,2] }
+                ]
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
                     { "data": "name" },
