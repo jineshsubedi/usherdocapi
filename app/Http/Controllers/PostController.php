@@ -39,7 +39,7 @@ class PostController extends Controller
             $all_posts= $this->post->where('cat_id', $request->filter_category)
             ->with('cat_info')
             ->orderBy('id','ASC')
-            ->paginate(1)
+            ->paginate(50)
             ->setPath($url);
             $filter_category = $request->filter_category;
         }else{

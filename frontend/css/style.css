@@ -253,7 +253,8 @@ body.nav-opened .doc-content {
               padding: 8px 12px; } }
           .doc-content .docs .table tr td:first-child {
             text-align: right;
-            vertical-align: middle; }
+            vertical-align: middle;
+            width: 140px; }
     .doc-content .docs .table-striped > tbody > tr:nth-of-type(odd) {
       background: rgba(255, 255, 255, 0.05); }
     .doc-content .docs .table-striped > tbody > tr:nth-of-type(even) {

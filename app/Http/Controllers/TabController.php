@@ -18,7 +18,7 @@ class TabController extends Controller
      */
     public function index()
     {
-        $all_tabs=$this->tab->paginate(20);
+        $all_tabs=$this->tab->orderBy('priority', 'asc')->paginate(50);
         return view('backend.tab.index')->with('tab',$all_tabs);
     }
 

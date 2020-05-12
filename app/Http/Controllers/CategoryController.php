@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $all_cats=$this->category->orderBy('priority','asc')->paginate(20);
+        $all_cats=$this->category->orderBy('priority','asc')->paginate(50);
         return view('backend.category.index')->with('category',$all_cats);
     }
 

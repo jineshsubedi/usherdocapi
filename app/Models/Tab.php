@@ -16,7 +16,7 @@ class Tab extends Model
     public static function getTabs($tab_ids)
     {
     	$ids = json_decode($tab_ids);
-    	$data = Tab::whereIn('id', $ids)->get();
+    	$data = Tab::whereIn('id', $ids)->orderBy('priority', 'asc')->get();
     	return $data;
     }
 }
