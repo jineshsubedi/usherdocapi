@@ -39,6 +39,7 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-success">Update</button>
+                    <a href="{{url('admin/tab')}}" class="btn btn-danger">Cancel</a>
 
                 </form>
             </div>

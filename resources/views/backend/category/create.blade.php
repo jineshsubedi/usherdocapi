@@ -53,8 +53,9 @@
 
                         </select>
                     </div>
-                    <button type="reset" class="btn btn-warning">Reset</button>
+                    <button type="reset" class="btn btn-info">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="{{url('admin/category')}}" class="btn btn-danger">Cancel</a>
 
                 </form>
             </div>

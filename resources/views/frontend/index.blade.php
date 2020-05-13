@@ -116,7 +116,7 @@
                 <p>{!! $post->description !!}</p>
             </div>
             <div class="col-sm-7 docs equal-item">
-              @if(isset($post->tab_ids))
+              @if(json_decode($post->tab_ids))
                 @php($tabs = \App\Models\Tab::getTabs($post->tab_ids))
                   <ul class="nav nav-tabs" role="tablist">
                  
