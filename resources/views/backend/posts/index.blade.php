@@ -47,7 +47,7 @@
                                     <th>Title</th>
                                     <th>Category</th>
                                     <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
-                                    <th>Pots Tab Manager</th>
+                                    <th>Post Tab Manager</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
