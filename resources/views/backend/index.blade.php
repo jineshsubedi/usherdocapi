@@ -52,7 +52,7 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Category</th>
-                                <th>Pots Tab Manager</th>
+                                <th>Post Tab Manager</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
