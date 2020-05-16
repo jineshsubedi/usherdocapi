@@ -40,4 +40,8 @@ class Category extends Model
     public function getCategoryWithAttr(){
         return $this->with('post')->where('status','active')->get();
     }
+    public static function countActiveCategory()
+    {
+        return Category::where('status', 'active')->count();
+    }
 }

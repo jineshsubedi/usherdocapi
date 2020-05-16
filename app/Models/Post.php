@@ -31,6 +31,10 @@ class Post extends Model
         }
         return '';
     }
+    public static function countActivePost()
+    {
+        return Post::where('status', 'active')->count();
+    }
 
     
 }

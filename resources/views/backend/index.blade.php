@@ -8,10 +8,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="ibox bg-success color-white widget-stat">
                     <div class="ibox-body">
-                        <?php 
-                            $total_cats=DB::table('categories')->where('status','active')->count();
-                        ?>
-                        <h2 class="m-b-5 font-strong">{{$total_cats}}</h2>
+                        <h2 class="m-b-5 font-strong">{{\App\Models\Category::countActiveCategory()}}</h2>
                         <div class="m-b-5">TOTAL CATEGORY</div><i class="fa fa-sitemap widget-stat-icon" aria-hidden="true"></i>
                     </div>
                 </div>
@@ -19,11 +16,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body">
-                        <?php 
-
-                            $total_posts=DB::table('posts')->where('status','active')->count();
-                        ?>
-                        <h2 class="m-b-5 font-strong">{{$total_posts}}</h2>
+                        <h2 class="m-b-5 font-strong">{{\App\Models\Post::countActivePost()}}</h2>
                         <div class="m-b-5">TOTAL POSTS</div><i class="fa fa-clone widget-stat-icon"></i>
                     </div>
                 </div>
@@ -31,10 +24,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
-                        <?php 
-                            $total_tabs=DB::table('tabs')->where('status','active')->count();
-                        ?>
-                        <h2 class="m-b-5 font-strong">{{$total_tabs}}</h2>
+                        <h2 class="m-b-5 font-strong">{{\App\Models\Tab::countActiveTab()}}</h2>
                         <div class="m-b-5">TOTAL TABS</div><i class="fa fa-th-large widget-stat-icon"></i>
                     </div>
                 </div>
@@ -62,7 +52,7 @@
                                 @foreach($post as $post_data)
                                 <tr>
                                     <td>{{$post_data->title}}</td>
-                                    <td>{{$post_data->cat_info->title}}</td>
+                                    <td>{{isset($post_data->cat_info) ? $post_data->cat_info->title : ''}}</td>
                                     <td><a href="{{route('post.show', $post_data->id)}}" class="btn btn-primary btn-sm ">Manage Post Tab</a></td>
                                     <td>
                                         @if($post_data->status=='active') 
@@ -81,7 +71,6 @@
                                         </form>
                                     </td>
                                 </tr>
-                               
                                 @endforeach
                            @endif
                         </tbody>

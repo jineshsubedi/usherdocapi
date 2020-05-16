@@ -31,11 +31,7 @@
                             <tbody>
                                @if($category)
                                     @foreach($category as $category_data)
-                                    <?php
-                                        $parent_cats=DB::table('categories')->select('title')->where('id',$category_data->parent_id)->get();
-                                    ?>
                                     <tr>
-
                                         <td>{{$category_data->title}}</td>
                                         <td>{{$category_data->priority}}</td>
                                         <td>

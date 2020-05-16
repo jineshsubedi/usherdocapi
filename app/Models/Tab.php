@@ -19,4 +19,8 @@ class Tab extends Model
     	$data = Tab::whereIn('id', $ids)->orderBy('priority', 'asc')->get();
     	return $data;
     }
+    public static function countActiveTab()
+    {
+        return Tab::where('status', 'active')->count();
+    }
 }

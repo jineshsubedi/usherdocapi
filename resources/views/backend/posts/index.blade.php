@@ -51,17 +51,11 @@
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
-                                
                             </thead>
-                            
                             <tbody>
                                @if($post)
                                     @foreach($post as $post_data)
-                                    <?php
-                                        $child_cat_id=DB::table('categories')->select('title')->where('id',$post_data->child_cat_id)->get();
-                                    ?>
                                     <tr>
-
                                         <td>{{$post_data->title}}</td>
                                         <td>{{isset($post_data->cat_info) ? $post_data->cat_info->title : ''}}</td>
                                         <td>{{$post_data->priority}}</td>
@@ -82,18 +76,12 @@
                                             </form>
                                         </td>
                                     </tr>
-                                   
                                     @endforeach
-                                    
                                @endif
-
                             </tbody>
                         </table>
                         {{$post->links()}}
-
-                        
                     {{-- </form> --}}
-                    
                 </div>
             </div>
         </div>
