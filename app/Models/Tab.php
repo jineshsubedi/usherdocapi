@@ -21,6 +21,11 @@ class Tab extends Model
     }
     public static function countActiveTab()
     {
-        return Tab::where('status', 'active')->count();
+        $data = Tab::where('status', 'active')->count();
+        if($data)
+        {
+            return $data;
+        }
+        return 0;
     }
 }

@@ -33,7 +33,12 @@ class Post extends Model
     }
     public static function countActivePost()
     {
-        return Post::where('status', 'active')->count();
+        $data = Post::where('status', 'active')->count();
+        if($data)
+        {
+            return $data;
+        }
+        return 0;
     }
 
     
