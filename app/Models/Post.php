@@ -17,14 +17,14 @@ class Post extends Model
         return $slug;
     }
     public function cat_info(){
-        return $this->hasOne('App\Models\Category','id','cat_id');
+        return $this->hasOne('App\Models\Category','id','cat_id')->where('status', 'active');
     }
     public function getAllPost(){
-        return $this->with('cat_info')->orderBy('id','ASC')->paginate(20);
+        return $this->with('cat_info')->orderBy('cat_id','asc')->paginate(50);
     }
     public static function getFirstChildSlug($cat_id)
     {
-        $data = Post::where('cat_id', $cat_id)->orderBy('id')->first();
+        $data = Post::where('cat_id', $cat_id)->where('status', 'active')->orderBy('id')->first();
         if($data)
         {
             return $data->slug;

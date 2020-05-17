@@ -17,28 +17,22 @@
                 {{-- @method('PATCH') --}}
                 <div class="form-group">
                     <label for="name">Category Name</label>
-                    <input type="text" name="title" value="{{$category_data->title}}" placeholder="Enter category name" class="form-control" required>
+                    <input type="text" name="title" value="{{$category_data->title}}" placeholder="Enter category name" class="form-control">
+                    @if($errors->has('title'))
+                        <span class="text-danger">
+                            {{$errors->first('title')}}
+                        </span>
+                    @endif
                 </div>
-
-                {{-- <div class="form-group">
-                    <label for="is_parent">Is Parent</label><br>
-                    <input type="checkbox" name='is_parent' id='is_parent' value='1' {{($category_data->is_parent==1) ? 'checked' : ''}}> Yes                        
-                </div>
-
-                <div class="form-group {{($category_data->is_parent==1) ? 'd-none' : ''}}" id='parent_cat_div'>
-                    <label for="parent_id">Parent Category</label>
-
-                    <select name="parent_id" class="form-control" >
-                        <option value="">--Select any category--</option>
-                        @foreach($parent_cats as $key=>$parent_cat)
-                            <option value='{{$key}}'  {{($key==$category_data->parent_id)? 'selected' : ''}}>{{$parent_cat}}</option>
-                        @endforeach
-                    </select>
-                </div> --}}
 
                 <div class="form-group">
                     <label for="priority">Priority</label>
                     <input type="number" class="form-control" value="{{$category_data->priority}}" name="priority">
+                    @if($errors->has('priority'))
+                        <span class="text-danger">
+                            {{$errors->first('priority')}}
+                        </span>
+                    @endif
                 </div>
 
                 <div class="form-group">

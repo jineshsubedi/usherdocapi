@@ -14,20 +14,36 @@
                 {{method_field('PATCH')}}
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" name="title" value="{{$tab_data->title}}" placeholder="Enter title name" class="form-control" required>
+                        <input type="text" name="title" value="{{$tab_data->title}}" placeholder="Enter title name" class="form-control">
+                        @if ($errors->has('title'))
+                            <span class="text-danger">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select name="type" class="form-control">
-                            <option value="table">Table</option>
-                            <option value="snippet">Snippet</option>
+                            <option value="">Select Type</option>
+                            <option value="table" @if($tab_data->type == 'table') selected @endif>Table</option>
+                            <option value="snippet" @if($tab_data->type == 'snippet') selected @endif>Snippet</option>
                         </select>
+                        @if ($errors->has('type'))
+                            <span class="text-danger">
+                                <strong>{{ $errors->first('type') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label for="priority">Priority</label>
                         <input type="number" class="form-control" name="priority" value="{{$tab_data->priority}}">
+                        @if ($errors->has('priority'))
+                            <span class="text-danger">
+                                <strong>{{ $errors->first('priority') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group">

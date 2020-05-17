@@ -21,21 +21,6 @@
                         @endif
                     </div>
 
-
-                    {{-- <div class="form-group">
-                        <label for="is_parent">Is Parent</label><br>
-                        <input type="checkbox" name='is_parent' id='is_parent' value='1' checked > Yes                        
-                    </div> --}}
-{{-- 
-                    <div class="form-group d-none" id='parent_cat_div'>
-                        <label for="parent_id">Parent Category</label>
-                        <select name="parent_id" class="form-control" placeholder='hdhd'>
-                            <option value="">--Select any category--</option>
-                            @foreach($parent_cats as $key=>$parent_cat)
-                                <option value='{{$key}}'>{{$parent_cat}}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <div class="form-group">
                         <label for="priority">Priority</label>
                         <input type="number" class="form-control" name="priority" placeholder="Enter number" value="{{old('priority')}}">

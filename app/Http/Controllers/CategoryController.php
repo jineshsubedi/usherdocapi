@@ -41,12 +41,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request,[
             'title'=>'required|string',
-            'priority'=>'integer|required',
+            'priority'=>'required|integer',
             'status'=>'required|in:active,inactive'
         ]);
+
         
         $data=$request->all();
         $data['slug']=$this->category->getSlug($request->title);
@@ -101,6 +101,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'title'=>'required|string',
+            'priority'=>'required|integer',
+            'status'=>'required|in:active,inactive'
+        ]);
         $this->category=$this->category->find($id);
         if(!$this->category){
             request()->session()->flash('error','Category not found');

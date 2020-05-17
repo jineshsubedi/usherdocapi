@@ -45,7 +45,7 @@ class TabController extends Controller
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
             'type'=>'required|in:table,snippet',
-            'priority' => 'integer|required'
+            'priority' => 'required|integer'
         ]);
 
         
@@ -99,6 +99,13 @@ class TabController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title'=>'string|required',
+            'status'=>'required|in:active,inactive',
+            'type'=>'required|in:table,snippet',
+            'priority' => 'required|integer'
+        ]);
+        
         $this->tab=$this->tab->find($id);
         if(!$this->tab){
             request()->session()->flash('error','tab not found');

@@ -33,10 +33,6 @@
 
         <div class="ibox-body">
             <div class="table-responsive">
-                {{-- <form method="POST" action="{{route('muldel')}}"> --}}
-                    
-                    {{csrf_field()}}
-                    {{method_field('DELETE')}}
                     <table class="table table-bordered" id="post-table" cellspacing="0" width="100%">
                         <thead>
                             <tr>
@@ -75,6 +71,9 @@
                            @endif
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        {{$post->links()}}
+                    </div>
                 {{-- </form> --}}
                 
             </div>

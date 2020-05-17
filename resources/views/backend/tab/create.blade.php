@@ -25,9 +25,15 @@
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select name="type" class="form-control">
-                            <option value="table">Table</option>
-                            <option value="snippet">Snippet</option>
+                            <option value="">Select Type</option>
+                            <option value="table" @if(old('type') == 'table') selected @endif>Table</option>
+                            <option value="snippet" @if(old('type') == 'snippet') selected @endif>Snippet</option>
                         </select>
+                        @if ($errors->has('type'))
+                            <span class="text-danger">
+                                <strong>{{ $errors->first('type') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group">

@@ -14,10 +14,24 @@
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" name="title" placeholder="Enter title name" class="form-control" value={{old('title')}} >
+                        <input type="text" name="title" placeholder="Enter title name" class="form-control" value="{{old('title')}}">
                         @if($errors->has('title'))
                             <span class="text-danger">
                                 <strong>{{$errors->first('title')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category_id" class="form-control" id="category_id">
+                            <option value="">Select Categories</option>
+                            @foreach($parent_cats as $key=>$cats)
+                                <option value="{{$cats->id}}" @if(old('category_id') == $cats->id) selected @endif>{{$cats->title}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('category_id'))
+                            <span class="text-danger">
+                                {{$errors->first('category_id')}}
                             </span>
                         @endif
                     </div>
@@ -39,34 +53,7 @@
                         @endif
                     </div>
 
-                    <div class="form-group">
-                        <label for="cat_id">Category</label>
-                        <select name="cat_id" class="form-control" id="cat_id" value="old('cat_id')}}">
-                            <option>--Select Categories--</option>
-                            @foreach($parent_cats as $key=>$cats)
-                                <option value="{{$cats->id}}">{{$cats->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    {{-- <div class="form-group d-none" id="child_cat_div">
-                        <label for="child_cat_id">Sub Category</label>
-                        <select name="child_cat_id" class="form-control" id="child_cat_id">
-                            <option>--Select Sub Categories</option>
-                            @foreach($child_cats as $key=>$cats)
-                                <option value="{{$cats->id}}">{{$cats->title}}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
-                    {{-- <div class="form-group">
-                        <label for="tab_id">Tab</label>
-                        <select name="tab_id" class="form-control" id="tab_id">
-                            <option>--Select Tab--</option>
-                            @foreach($tabs as $key=>$tab)
-                                <option value="{{$tab->id}}">{{$tab->type}}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
+                    
 
                     <div class="form-group">
                         <h4>Select Required Tab</h4>
@@ -129,50 +116,5 @@
              placeholder:'Description'
          });
     </script>
-    <script>
-        $('#cat_id').change(function(){
-            var cat_id=$(this).val();
-            // alert(cat_id);
-            if(cat_id !=null){
-                // ajax call
-                $.ajax({
-                    url:"/admin/category/"+cat_id+"/child",
-                    type:"POST",
-                    data:{
-                        // _token:token,
-                        // parameter:value,
-                        '_token': $('input[name=_token]').val(),
-                    },
-                    success:function(response){
-                        console.log(response);
-
-                        if(typeof(response)!='object'){
-                            response=$.parseJSON(response);
-                        }
-                        var html_option="<option value=''>--Select any one--</option>";
-                        if(response.status){
-                            var data=response.data;
-                            if(response.data){
-                                $('#child_cat_div').removeClass('d-none');
-                                $.each(data,function(id,title){
-                                    html_option += "<option value='"+id+"'>"+title+"</option>";
-                                });
-                            }
-                            else{
-                                console.log('no response data');
-                            }
-                        }
-                        else{
-                            $('#child_cat_div').addClass('d-none');
-                        }
-                        $('#child_cat_id').html(html_option);
-
-                    }
-                });
-            }
-            else{
-
-            }
-        })
-    </script>
+    
 @endsection

@@ -34,7 +34,7 @@ class Category extends Model
     }
 
     public function post(){
-        return $this->hasMany('App\Models\Post','cat_id','id')->orderBy('priority','ASC');
+        return $this->hasMany('App\Models\Post','cat_id','id')->where('status', 'active')->orderBy('priority','ASC');
     }
 
     public function getCategoryWithAttr(){

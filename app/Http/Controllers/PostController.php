@@ -57,8 +57,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $parent_cats=$this->category->get();
-        $tabs=$this->tab->get();
+        $parent_cats=$this->category->where('status', 'active')->get();
+        $tabs=$this->tab->where('status', 'active')->get();
         
         return view('backend.posts.create')
         ->with('tabs',$tabs)
@@ -75,26 +75,23 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title'=>'string|required',
+            'category_id' => 'required|integer',
             'status'=>'required|in:active,inactive',
             'description'=>'nullable|string',
             'priority'=>'required|integer',
         ]);
-        // dd($request->all());
-
-        // $this->validate($ruls);z
-        // $request->validate($ruls);
-        // dd($ruls);
+        
         $slug=$this->category->getSlug($request->title);
+
         $data = [
             'title' => $request->title,
             'description' => $request->description,
             'slug' => $slug,
             'priority'=>$request->priority,
             'status' => $request->status,
-            'cat_id' => $request->cat_id,
+            'cat_id' => $request->category_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
-        // dd($data);
         \App\Models\Post::create($data);
         request()->session()->flash('success','Post successfully added');
         return redirect()->route('post.index');
@@ -121,7 +118,13 @@ class PostController extends Controller
     public function show($id)
     {
         $post = \App\Models\Post::find($id);
-        $tab_ids = json_decode($post->tab_ids);
+        if(json_decode($post->tab_ids))
+        {
+            $tab_ids = json_decode($post->tab_ids);
+        }else{
+            $tab_ids = [0];
+        }
+        
         $tabs = \App\Models\Tab::whereIn('id', $tab_ids)->orderBy('priority', 'asc')->get();
         return view('backend.posts.view')->with('post', $post)->with('tabs', $tabs);
 
@@ -140,11 +143,16 @@ class PostController extends Controller
             request()->session()->flash('error','Post not found');
             return redirect()->route('post.index');
         }
-        $tab_ids = json_decode($this->post->tab_ids);
-        $tabs=$this->tab->get();
+        if(json_decode($this->post->tab_ids)){
+            $tab_ids = json_decode($this->post->tab_ids);   
+        }else{
+            $tab_ids = [0];
+        }
+        
+        $tabs=$this->tab->where('status', 'active')->get();
 
-        $parent_cats=$this->category->get();
-        // $child_cats=$this->category->where('is_parent',0)->get();
+        $parent_cats=$this->category->where('status', 'active')->get();
+
         return view('backend.posts.edit')
         ->with('tabs',$tabs)
         ->with('tab_ids',$tab_ids)
@@ -171,6 +179,7 @@ class PostController extends Controller
             'status'=>'required|in:active,inactive',
             'description'=>'nullable|string',
             'priority'=>'required|integer',
+            'category_id' => 'required|integer'
         ]);
         
         // $data=$request->all();
@@ -184,12 +193,10 @@ class PostController extends Controller
             'slug' => $slug,
             'priority'=>$request->priority,
             'status' => $request->status,
-            'cat_id' => $request->cat_id,
+            'cat_id' => $request->category_id,
             'tab_ids' => json_encode($request->tab_ids)
         ];
-        // dd($data);
-        
-        // $status=$this->post->save();
+
         $status = \App\Models\Post::find($id)->update($data);
         if($status){
             request()->session()->flash('success','Post successfully updated');

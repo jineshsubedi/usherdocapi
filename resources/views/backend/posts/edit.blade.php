@@ -28,14 +28,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="cat_id">Category</label>
-                        <select class="form-control" name="cat_id" id="cat_id">
-                            <option value="">--Select Category--</option>
-                            {{-- <option value="" >{{$cat_id}}</option> --}}
+                        <label for="">Category</label>
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="">Select Category</option>
                             @foreach($parent_cats as $parent_cat)
                                 <option value="{{$parent_cat->id}}" {{($post_data->cat_id==$parent_cat->id)? 'selected' : ''}}>{{$parent_cat->title}}</option>
                             @endforeach
                         </select>
+                        @if($errors->has('category_id'))
+                            <span class="text-danger">
+                                {{$errors->first('category_id')}}
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group d-none" id="child_cat_div">
                         <label for="child_cat_id">Sub Category</label>
@@ -47,6 +51,7 @@
                     <div class="form-group">
                         <h4>Select Required Tab</h4>
                         <div class="row">
+                            @if(count($tabs) > 0)
                             @foreach($tabs as $tab)
                             <div class="col-md-2">
                                 @if(in_array($tab->id, $tab_ids))
@@ -56,6 +61,7 @@
                                 @endif
                             </div>
                             @endforeach
+                            @endif
                         </div>
                     </div>
 
