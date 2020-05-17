@@ -77,7 +77,7 @@ class PostController extends Controller
             'title'=>'string|required',
             'category_id' => 'required|integer',
             'status'=>'required|in:active,inactive',
-            'description'=>'nullable|string',
+            'description'=>'required|string',
             'priority'=>'required|integer',
         ]);
         
@@ -177,7 +177,7 @@ class PostController extends Controller
         $this->validate($request, [
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
-            'description'=>'nullable|string',
+            'description'=>'required|string',
             'priority'=>'required|integer',
             'category_id' => 'required|integer'
         ]);

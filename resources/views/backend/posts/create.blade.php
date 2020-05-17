@@ -45,7 +45,6 @@
                         <label for="description">Description</label>
                         <textarea type="text" id="description" name="description" placeholder="Text description" rows=6 class="form-control" value="{{old('description')}}"></textarea>
                         @if($errors->has('description'))
-
                             <span class="text-danger">
                                 {{$errors->first('description')}}
                             </span>
