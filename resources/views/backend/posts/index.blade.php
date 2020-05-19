@@ -159,6 +159,7 @@
             display: block;
             opacity: 1;
         }
+
     </style>
 @endsection
 @section('scripts')

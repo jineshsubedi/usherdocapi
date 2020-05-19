@@ -16,7 +16,7 @@
                 {{method_field('PATCH')}}
                 {{-- @method('PATCH') --}}
                 <div class="form-group">
-                    <label for="name">Category Name</label>
+                    <label for="name">Category Name <sup style="color:red;">*</sup></label>
                     <input type="text" name="title" value="{{$category_data->title}}" placeholder="Enter category name" class="form-control">
                     @if($errors->has('title'))
                         <span class="text-danger">
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="priority">Priority</label>
+                    <label for="priority">Priority <sup style="color:red;">*</sup></label>
                     <input type="number" class="form-control" value="{{$category_data->priority}}" name="priority">
                     @if($errors->has('priority'))
                         <span class="text-danger">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="status">Status</label>
+                    <label for="status">Status <sup style="color:red;">*</sup></label>
                     <select name="status" class="form-control">
                         <option value="active" {{($category_data->status=='active') ? 'selected' : ''}}>active</option>
                         <option value="inactive" {{($category_data->status=='inactive') ? 'selected' : ''}}>inactive</option>

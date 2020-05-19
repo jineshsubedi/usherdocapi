@@ -13,8 +13,14 @@
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" value="{{$post_data->title}}" placeholder="Enter title name" class="form-control" required>
+                        <label for="title">Title <sup style="color:red;">*</sup></label>
+                        <input type="text" name="title" value="{{$post_data->title}}" placeholder="Enter title name" class="form-control">
+                        @if($errors->has('title'))
+                            <span class="text-danger">
+                                {{$errors->first('title')}}
+                            </span>
+
+                        @endif
                     </div>
 
                     {{-- <div class="form-group">
@@ -34,7 +40,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="">Category</label>
+                        <label for="">Category <sup style="color:red;">*</sup></label>
                         <select class="form-control" name="category_id" id="category_id">
                             <option value="">Select Category</option>
                             @foreach($parent_cats as $parent_cat)
@@ -55,15 +61,15 @@
                     </div>
 
                     <div class="form-group">
-                        <h4>Select Required Tab</h4>
+                        <h4>Select Required Tab <sup style="color:red;">*</sup></h4>
                         <div class="row">
                             @if(count($tabs) > 0)
                             @foreach($tabs as $tab)
                             <div class="col-md-2">
                                 @if(in_array($tab->id, $tab_ids))
-                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"checked> {{$tab->title}}
+                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}" @if(is_array(old('tab_ids')) && in_array($tab->id, old('tab_ids'))) checked @endif checked> {{$tab->title}}
                                 @else
-                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"> {{$tab->title}}
+                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}" @if(is_array(old('tab_ids')) && in_array($tab->id, old('tab_ids'))) checked @endif> {{$tab->title}}
                                 @endif
                             </div>
                             @endforeach
@@ -72,12 +78,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="priority">Priority</label>
+                        <label for="priority">Priority <sup style="color:red;">*</sup></label>
                         <input type="number" class="form-control" name="priority"  value="{{$post_data->priority}}">
                     </div>
 
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status <sup style="color:red;">*</sup></label>
                         <select name="status" class="form-control">
                             <option value="active" {{($post_data->status=='active') ? 'selected' : ''}}>active</option>
                             <option value="inactive" {{($post_data->status=='inactive') ? 'selected' : ''}}>inactive</option>

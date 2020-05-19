@@ -77,7 +77,6 @@ class PostController extends Controller
             'title'=>'string|required',
             'category_id' => 'required|integer',
             'status'=>'required|in:active,inactive',
-            'description'=>'required|string',
             'priority'=>'required|integer',
         ]);
         
@@ -177,7 +176,6 @@ class PostController extends Controller
         $this->validate($request, [
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
-            'description'=>'required|string',
             'priority'=>'required|integer',
             'category_id' => 'required|integer'
         ]);
@@ -227,7 +225,7 @@ class PostController extends Controller
         else{
             request()->session()->flash('error','Error while deleting post');
         }
-        return redirect()->route('post.index');
+        return redirect()->back();
     }
 
     // public function postTab(){

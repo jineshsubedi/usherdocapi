@@ -21,21 +21,23 @@
                 <div id="tabSection">
                    <div class="row">
                         <div class="col-md-10">
-                            <ul class="nav nav-tabs" role="tablist">
+                          
+                            <ul class="nav nav-tabs" role="tablist" id="myTab">
                                 @foreach($tabs as $key=>$tab)
-                                <li class="nav-item" id="tab{{$tab->id}}">
-                                    <a class="nav-link {{($key==0) ? 'active' : ''}}" href="#tabBtn{{$tab->id}}" role="tab" data-toggle="tab" aria-selected="true">{{$tab->title}}</a>
-                                </li>
+                                  <li class="nav-item" id="tab{{$tab->id}}">
+                                      <a class="nav-link" href="#tabBtn{{$tab->id}}" role="tab" data-toggle="tab" aria-selected="true">{{$tab->title}}</a>
+                                  </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-primary" onclick="openPostTabModel()">Add Post-Tab</button>
                         </div> 
-                    </div>          
+                    </div>     
+                    
                     <div class="tab-content">
                         @foreach($tabs as $k=>$tab)
-                        <div class="tab-pane @if($k==0) active @endif" id="tabBtn{{$tab->id}}">
+                        <div class="tab-pane" id="tabBtn{{$tab->id}}">
                             @if($tab->type=='table')
                                 <table class="table table-bordered">
                                     <tr>
@@ -95,17 +97,17 @@
                                 </table>
                             @endif
                             @if($tab->type=='snippet')
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" style="width:100%">
                                     <tr>
                                         <th>Title</th>
-                                        <th>Code</th>
+                                        <th style="width:50px">Code</th>
                                         <th>Action</th>
                                     </tr>
                                     @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
                                     @foreach($contents as $content)
-                                    <tr>
+                                    <tr style="width:30%;">
                                         <td>{{$content->title}}</td>
-                                        <td><pre>{{json_decode($content->snippet)}}</pre></td>
+                                        <td style="max-width:720px"><div class="pre"><pre style="overflow:auto;white-space:nowarp">{{json_decode($content->snippet)}}</pre></div></td>
                                         <td>
                                             <form action="{{route('post.tab.delete', $content->id)}}" method="post">
                                                 {{csrf_field()}}
@@ -217,6 +219,11 @@
     </div>
   </div>
 </div>
+<style>
+  pre{
+    overflow: auto;
+  }
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 <script>
     function openPostTabModel()
@@ -263,5 +270,38 @@
     {
         $('#postTabEditModel'+id).modal('show');
     }
+
+        // $('a[data-toggle="tab"]').click(function (e) {
+        //     e.preventDefault();
+        //     $(this).tab('show');
+        // });
+
+        // $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+        //     var id = $(e.target).attr("href");
+        //     localStorage.setItem('selectedTab', id)
+        // });
+
+        // var selectedTab = localStorage.getItem('selectedTab');
+        // if (selectedTab != null) {
+        //     $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+        // }
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+          localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+          $('#myTab a[href="' + activeTab + '"]').tab('show');
+        }
+</script>
+<script>
+  $(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
+});
 </script>
 @endsection

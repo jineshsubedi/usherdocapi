@@ -13,7 +13,7 @@
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">Title <sup style="color:red;">*</sup></label>
                         <input type="text" name="title" value="{{$tab_data->title}}" placeholder="Enter title name" class="form-control">
                         @if ($errors->has('title'))
                             <span class="text-danger">
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="type">Type</label>
+                        <label for="type">Type <sup style="color:red;">*</sup></label>
                         <select name="type" class="form-control">
                             <option value="">Select Type</option>
                             <option value="table" @if($tab_data->type == 'table') selected @endif>Table</option>
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="priority">Priority</label>
+                        <label for="priority">Priority <sup style="color:red;">*</sup></label>
                         <input type="number" class="form-control" name="priority" value="{{$tab_data->priority}}">
                         @if ($errors->has('priority'))
                             <span class="text-danger">
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status <sup style="color:red;">*</sup></label>
                         <select name="status" class="form-control">
                             <option value="active" {{($tab_data->status=='active') ? 'selected' : ''}}>active</option>
                             <option value="inactive" {{($tab_data->status=='inactive') ? 'selected' : ''}}>inactive</option>

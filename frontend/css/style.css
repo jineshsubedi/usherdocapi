@@ -260,6 +260,9 @@ body.nav-opened .doc-content {
     .doc-content .docs .table-striped > tbody > tr:nth-of-type(even) {
       background: rgba(0, 0, 0, 0.05); }
 
+    .doc-content .description { word-break: break-word; } .doc-content .docs .table tr td { word-break: break-word; } .doc-content .docs .table tr td:first-child { text-align: left; }
+
+
 /*.table-row{
 	display: table-row;
 }*/

@@ -12,7 +12,7 @@
                <form action="{{route('category.store')}}" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="title">Category Name</label>
+                        <label for="title">Category Name <sup style="color:red;">*</sup></label>
                         <input type="text" name="title" placeholder="Enter category name" class="form-control" value="{{old('title')}}">
                         @if($errors->has('title'))
                             <span class="text-danger">
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="priority">Priority</label>
+                        <label for="priority">Priority <sup style="color:red;">*</sup></label>
                         <input type="number" class="form-control" name="priority" placeholder="Enter number" value="{{old('priority')}}">
                         @if($errors->has('priority'))
                             <span class="text-danger">
@@ -31,7 +31,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status <sup style="color:red;">*</sup></label>
                         <select name="status" class="form-control">
                             <option value="active">active</option>
                             <option value="inactive">inactive</option>

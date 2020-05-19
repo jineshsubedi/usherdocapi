@@ -13,7 +13,7 @@
                 {{-- @csrf --}}
                 {{csrf_field()}}
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">Title <sup style="color:red;">*</sup></label>
                         <input type="text" name="title" placeholder="Enter title name" class="form-control" value="{{old('title')}}">
                         @if($errors->has('title'))
                             <span class="text-danger">
@@ -22,7 +22,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
+                        <label>Category <sup style="color:red;">*</sup></label>
                         <select name="category_id" class="form-control" id="category_id">
                             <option value="">Select Categories</option>
                             @foreach($parent_cats as $key=>$cats)
@@ -43,7 +43,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" id="description" name="description" placeholder="Text description" rows=6 class="form-control" value="{{old('description')}}"></textarea>
+                        <textarea type="text" id="description"  name="description" placeholder="Text description" rows=6 class="form-control" >{{old('description')}}</textarea>
                         @if($errors->has('description'))
                             <span class="text-danger">
                                 {{$errors->first('description')}}
@@ -55,18 +55,18 @@
                     
 
                     <div class="form-group">
-                        <h4>Select Required Tab</h4>
+                        <h4>Select Required Tab <sup style="color:red;">*</sup></h4>
                         <div class="row">
                             @foreach($tabs as $tab)
                             <div class="col-md-2">
-                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"> {{$tab->title}}
+                                <input type="checkbox" name="tab_ids[]" id="tabcheckbox{{$tab->id}}" value="{{$tab->id}}"  @if(is_array(old('tab_ids')) && in_array($tab->id, old('tab_ids'))) checked @endif> {{$tab->title}}
                             </div>
                             @endforeach
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="priority">Priority</label>
+                        <label for="priority">Priority <sup style="color:red;">*</sup></label>
                         <input type="number" class="form-control" name="priority" placeholder="Enter number" value="{{old('priority')}}">
                         @if($errors->has('priority'))
                             <span class="text-danger">
@@ -76,7 +76,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status <sup style="color:red;">*</sup></label>
                         <select name="status" class="form-control">
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
@@ -104,6 +104,7 @@
 @section('styles')
     <link href="{{asset('/summernote/summernote.min.css')}}" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    
 @endsection
 @section('scripts')
     <script src="{{asset('/summernote/summernote.min.js')}}"></script>
