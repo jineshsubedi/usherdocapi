@@ -296,12 +296,19 @@
 <script>
   $(document).ready(function(){
 	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-		localStorage.setItem('activeTab', $(e.target).attr('href'));
+    // alert(e.target);
+		sessionStorage.setItem('activeTab', $(e.target).attr('href'));
 	});
-	var activeTab = localStorage.getItem('activeTab');
+	var activeTab = sessionStorage.getItem('activeTab');
 	if(activeTab){
+    // alert('yes');
 		$('#myTab a[href="' + activeTab + '"]').tab('show');
-	}
+  }
+  else{
+    // alert('no');
+
+    $('#myTab a:first').tab('show');
+  }
 });
 </script>
 @endsection

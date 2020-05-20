@@ -42,7 +42,7 @@
                     </div> --}}
 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Description <sup style="color:red;">*</sup></label>
                         <textarea type="text" id="description"  name="description" placeholder="Text description" rows=6 class="form-control" >{{old('description')}}</textarea>
                         @if($errors->has('description'))
                             <span class="text-danger">

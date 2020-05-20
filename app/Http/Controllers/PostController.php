@@ -78,6 +78,8 @@ class PostController extends Controller
             'category_id' => 'required|integer',
             'status'=>'required|in:active,inactive',
             'priority'=>'required|integer',
+            'description'=>'required'
+
         ]);
         
         $slug=$this->category->getSlug($request->title);
@@ -177,7 +179,8 @@ class PostController extends Controller
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
             'priority'=>'required|integer',
-            'category_id' => 'required|integer'
+            'category_id' => 'required|integer',
+            'description'=>'required'
         ]);
         
         // $data=$request->all();
