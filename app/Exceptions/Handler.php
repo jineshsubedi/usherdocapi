@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Auth;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -44,6 +45,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof \Illuminate\Session\TokenMismatchException){
+            // token mismatch is a security concern, ensure logout.
+            Auth::logout();
+
+            // Tell the user what happened.
+            session()->flash('alert-warning','Your session expired. Please login to continue.');
+
+            // Go to login.
+            return redirect()->route('login');
+        }
+
         return parent::render($request, $exception);
     }
 
