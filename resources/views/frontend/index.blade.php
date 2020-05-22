@@ -10,8 +10,11 @@
   <a href="#" class="open-mobilenav">
       <span class="glyphicon glyphicon-menu-hamburger"></span>
       <img src="frontend/images/logo.png" class="img-responsive logo">
-      <a class="btn btn-primary auth-btn">Login</a>
-      <!--<a class="btn btn-default auth-btn">Log out</a>-->
+      @auth
+      <a class="btn btn-default auth-btn" href="{{route('logout')}}">Log out</a>
+      @else
+      <a class="btn btn-primary auth-btn" href="{{route('login')}}">Login</a>
+      @endauth
   </a>
   </div>
   <!-- Sidenav -->
@@ -110,8 +113,23 @@
     <!-- Introduction starts -->
     <div id="introduction" class="doc-content no-padding row-introduction">
     <header class="sticky-header">
-            <div><input type="search" placeholder="Search API" class="form-control search-input"></div>
-            <a class="btn btn-primary auth-btn">Login</a>
+            <div>
+              <input type="search" id="searchPost" placeholder="Search API" class="form-control search-input">
+            </div>
+            @auth
+              {{-- <a class="btn btn-default auth-btn" href="{{route('logout')}}">Log out</a> --}}
+              <a class="btn btn-default auth-btn" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
+                        {{ __('Logout') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
+            @else
+            <a class="btn btn-primary auth-btn" href="{{route('login')}}">Login</a>
+            @endauth
             <!--<a class="btn btn-default auth-btn">Log out</a>-->
       </header>
 
@@ -244,4 +262,22 @@
         @endforeach
       @endif
     @endforeach
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="{{asset('backend/assets/vendors/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $('#searchPost').autocomplete({
+        source: '{{ route("front.search") }}',
+        minlength:1,
+        autoFocus:true,
+        select:function(e,ui){
+          $(this).val(ui.item.value);
+          var slug = ui.item.slug;
+          var url = '{{url('')}}';
+          url += '/#'+slug;
+          location = url;
+        }
+      })
+    </script>
 @endsection

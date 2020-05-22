@@ -55,9 +55,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
     Route::get('/ajaxTab', 'TabController@ajaxTab')->name('postTab.ajaxTab');
     Route::post('/postTabManager/save', 'PostController@postTabManager')->name('postTabManager.save');
 });
-// Route::get('/logout', function(){
-//     Auth::logout();
-//     return Redirect::to('login');
-//  });
+
+Route::get('/search', 'FrontendController@search')->name('front.search');
 
 // ----------------------Back End Routes ends----------------------//
