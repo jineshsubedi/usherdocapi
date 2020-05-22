@@ -28,12 +28,13 @@ class UserController extends Controller
     		'name' => 'required',
     		'email' => 'required',
     		'password' => 'required',
+            'status' => 'required'
     	]);
     	$data = [
     		'name' => $request->name,
     		'email' => $request->email,
     		'password' => bcrypt($request->password),
-    		'status' => 'active',
+    		'status' => $request->status
     	];
     	User::create($data);
     	request()->session()->flash('success','User successfully added');
@@ -57,6 +58,7 @@ class UserController extends Controller
     		'name' => 'required',
     		'email' => 'required',
     		'password' => 'sometimes',
+            'status' => ''
     	]);
     	$user = User::find($id);
     	if(!$user)
@@ -73,6 +75,7 @@ class UserController extends Controller
     		'name' => $request->name,
     		'email' => $request->email,
     		'password' => $password,
+            'status' => $request->status
     	];
     	User::find($id)->update($data);
     	request()->session()->flash('success','User successfully updated');

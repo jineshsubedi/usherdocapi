@@ -42,6 +42,14 @@
                             </span>
                         @endif
                     </div>
+
+                    <div class="form-group">
+                    <label for="status">Status <sup style="color:red;">*</sup></label>
+                    <select name="status" class="form-control">
+                        <option value="active" {{($user->status=='active') ? 'selected' : ''}}>active</option>
+                        <option value="inactive" {{($user->status=='inactive') ? 'selected' : ''}}>inactive</option>
+                    </select>
+                </div>
                   
                     <button type="reset" class="btn btn-info">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
