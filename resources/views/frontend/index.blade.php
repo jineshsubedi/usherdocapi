@@ -6,7 +6,14 @@
 <div class="container-fluid">
   <div class="row">
   <!-- Mobile nav toggler -->
-  <a href="#" class="open-mobilenav"><span class="glyphicon glyphicon-menu-hamburger"></span><img src="frontend/images/logo.png" class="img-responsive"></a>
+  <div class="mobile-sticky-header">
+  <a href="#" class="open-mobilenav">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
+      <img src="frontend/images/logo.png" class="img-responsive logo">
+      <a class="btn btn-primary auth-btn">Login</a>
+      <!--<a class="btn btn-default auth-btn">Log out</a>-->
+  </a>
+  </div>
   <!-- Sidenav -->
     <div class="no-padding sidebar" id="sidenav">
       <div class="logo"><a href=""><img src="frontend/images/logo.png" class="img-responsive"></a></div>
@@ -102,6 +109,12 @@
 
     <!-- Introduction starts -->
     <div id="introduction" class="doc-content no-padding row-introduction">
+    <header class="sticky-header">
+            <div><input type="search" placeholder="Search API" class="form-control search-input"></div>
+            <a class="btn btn-primary auth-btn">Login</a>
+            <!--<a class="btn btn-default auth-btn">Log out</a>-->
+      </header>
+
       <div class="col-sm-12 description equal-item">
         <h2 class="desc-title">Ushur API Documentation</h2>
         <p>Ushur is an AI-powered platform that combines process automation and conversational interfaces to automate enterprise workflows.  In doing so Ushur delivers great value to those enterprises by eliminating manual work and freeing up human capital for higher valued business needs. </p>
