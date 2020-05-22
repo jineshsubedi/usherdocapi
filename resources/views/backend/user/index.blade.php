@@ -11,65 +11,45 @@
                 </div>
             </div>
             <div class="ibox-head">
-                <div class="ibox-title">Category List</div>
+                <div class="ibox-title">User List</div>
                 <div class="ibox-title float-right">
-                    <a href="{{route('category.create')}}" class="btn btn-success btn-sm float-right">Add Category</a>
+                    <a href="{{route('user.create')}}" class="btn btn-success btn-sm float-right">Add User</a>
                 </div>
             </div>
             <div class="ibox-body">
                 <div class="table-responsive">
-                    {{-- <form method="POST" action="{{route('muldel')}}"> --}}
-                        <table class="table table-bordered" id="cat-table" cellspacing="0" width="100%">
+                    {{-- <form method="tab" action="{{route('muldel')}}"> --}}
+                        
+                        <table class="table table-bordered" id="example-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
-                                    <th>Status</th>
-                                    <th>Privacy</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               @if($category)
-                                    @foreach($category as $category_data)
+                               @if($users)
+                                    @foreach($users as $user)
                                     <tr>
-                                        <td>{{$category_data->title}}</td>
-                                        <td>{{$category_data->priority}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
                                         <td>
-                                            @if($category_data->status=='active') 
-                                                <span class="badge badge-success">active</span>
-                                            @else
-                                                <span class="badge badge-warning">inactive</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($category_data->private==0) 
-                                                <span class="badge badge-info">Public</span>
-                                            @else
-                                                <span class="badge badge-danger">Private</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{route('category.edit',$category_data->id)}}"  class="btn btn-primary btn-xs m-r-5 float-left" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></a>
-                                            <form class="float-left" action="{{route('category.destroy',$category_data->id)}}" method="POST" onsubmit="return confirm('Are your sure?')">
+                                            <form class="float-left" action="{{route('user.destroy',$user->id)}}" method="POST" onsubmit="return confirm('Are your sure?')">
                                                 {{csrf_field()}}
                                                 {{method_field('DELETE')}}
+                                                <a href="{{route('user.edit',$user->id)}}"  class="btn btn-primary btn-xs m-r-5 float-left" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></a>
                                                 <button  type="submit"  class="btn btn-danger btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></buttton>
                                             </form>
                                         </td>
                                     </tr>
-                                   
                                     @endforeach
-                              
                                @endif
-
-                              
                             </tbody>
-                           
                         </table>
-                        {{$category->links()}}
+
+                        {{$users->links()}}
                     {{-- </form> --}}
-                    
                 </div>
             </div>
         </div>
@@ -140,12 +120,12 @@
 @section('scripts')
 <script>
      $(function() {
-            $('#cat-table').DataTable({
+            $('#example-table').DataTable({
                 pageLength: 10,
                 "order": [],
                 "columnDefs": [
-                    { "orderable": false, "targets": [2,3] },
-                    { "orderable": true, "targets": [0,1] }
+                    { "orderable": false, "targets": [3,4] },
+                    { "orderable": true, "targets": [0,1,2] }
                 ]
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [

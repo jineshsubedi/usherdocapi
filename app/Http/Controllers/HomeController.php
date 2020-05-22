@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route(request()->user()->role);
+        return redirect()->route('admin');
     }
 
     public function admin(){

@@ -50,9 +50,14 @@ class CategoryController extends Controller
         
         $data=$request->all();
         $data['slug']=$this->category->getSlug($request->title);
-        // dd($data);
-        $this->category->fill($data);
-        $status=$this->category->save();
+        $data = [
+            'title' => $request->title,
+            'priority' => $request->priority,
+            'slug' => $data['slug'],
+            'status' => $request->status,
+            'private' => $request->privacy
+        ];
+        $status=Category::create($data);
         if($status){
             request()->session()->flash('success','Category successfully added');
         }
@@ -111,10 +116,13 @@ class CategoryController extends Controller
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
         }
-        $data=$request->all();
-        // dd($request->all());
-        $this->category->fill($data);
-        $status=$this->category->save();
+        $data=[
+            'title' => $request->title,
+            'priority' => $request->priority,
+            'status' => $request->status,
+            'private' => $request->privacy
+        ];
+        $status=Category::find($id)->update($data);
         if($status){
             request()->session()->flash('success','Category successfully updated');
         }

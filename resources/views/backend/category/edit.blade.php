@@ -40,7 +40,14 @@
                     <select name="status" class="form-control">
                         <option value="active" {{($category_data->status=='active') ? 'selected' : ''}}>active</option>
                         <option value="inactive" {{($category_data->status=='inactive') ? 'selected' : ''}}>inactive</option>
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label for="status">Privacy <sup style="color:red;">*</sup></label>
+                    <select name="privacy" class="form-control">
+                        <option value="0" {{($category_data->private=='0') ? 'selected' : ''}}>Public</option>
+                        <option value="1" {{($category_data->private=='1') ? 'selected' : ''}}>Private</option>
                     </select>
                 </div>
                 

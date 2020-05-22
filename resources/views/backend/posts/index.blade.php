@@ -39,8 +39,9 @@
 
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                     <td>
-                                        <button type="button" onclick="filterByCategory()" class="btn btn-default btn-sm">filter</button>
+                                        <button type="button" onclick="filterByCategory()" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Filter</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -49,6 +50,7 @@
                                     <th>Priority <sub><small>[ Lower value higher priority ]</small></sub></th>
                                     <th>Post Tab Manager</th>
                                     <th>Status</th>
+                                    <th>Privacy</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -65,6 +67,13 @@
                                                 <span class="badge badge-success">active</span>
                                             @else
                                                 <span class="badge badge-warning">inactive</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($post_data->private==0) 
+                                                <span class="badge badge-info">Public</span>
+                                            @else
+                                                <span class="badge badge-danger">Private</span>
                                             @endif
                                         </td>
                                         <td>
@@ -169,7 +178,7 @@
                 pageLength: 10,
                 "order": [],
                 "columnDefs": [
-                    { "orderable": false, "targets": [3,4,5] },
+                    { "orderable": false, "targets": [3,4,5,6] },
                     { "orderable": true, "targets": [0,1,2] }
                 ]
                 //"ajax": './assets/demo/data/table_data.json',

@@ -83,6 +83,14 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="status">Privacy <sup style="color:red;">*</sup></label>
+                        <select name="privacy" class="form-control">
+                            <option value="0">Public</option>
+                            <option value="1">Private</option>
+                        </select>
+                    </div>
+
                     <button type="reset" class="btn btn-info">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                     <a href="{{url('admin/post')}}" class="btn btn-danger">Cancel</a>

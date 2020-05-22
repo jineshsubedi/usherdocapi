@@ -18,29 +18,37 @@
         </ul>
         @foreach($categories as $category)
         <ul class="nav nav-pills nav-stacked">
+          @auth
           <li>
           <a href="#{{\App\Models\Post::getFirstChildSlug($category->id)}}"><h4 class="title"><b class="caret"></b>{{$category->title}}</h4></a>
             <ul class="sub-menu">
               @if(isset($category->post))
                 @foreach($category->post as $k=>$post)
-                  <li><a href="#{{$post->slug}}" title="{{$post->slug}}">{{$post->title}}</a></li>
+                  <li><a href="#{{$post->slug}}" title="{{$post->slug}}">
+                    {{$post->title}} 
+                  </a></li>
                 @endforeach
               @endif
-              {{-- <li><a href="#signIn" title="SignIn">SignIn</a></li>
-              <li><a href="#RenewToken" title="RenewToken">RenewToken</a></li> 
-              <li><a href="#GetDoNotDisturbStatusSettings" title="Get DoNotDisturb Status Settings">Get DoNotDisturb Status Settings</a></li>
-              <li><a href="#GetDoNotDisturbSettings" title="Get DoNotDisturb Settings">Get DoNotDisturb Settings</a></li>
-              <li><a href="#SetDoNotDisturbStatusSettings" title="Set DoNotDisturb Status Settings">Set DoNotDisturb Status Settings</a></li>
-              <li><a href="#SetDoNotDisturbSettings" title="Set DoNotDisturb Settings">Set DoNotDisturb Settings</a></li>
-              <li><a href="#AccountListQuery" title="Account List Query">Account List Query</a></li>
-              <li><a href="#SubAccountList" title="Get List of Sub-Accounts">Get List of Sub-Accounts </a></li>
-              <li><a href="#GetUserRoleInfo" title="Get User Role Information">Get User Role Information</a></li>
-              <li><a href="#SetUserRoleInfo" title="Set User Role Information">Set User Role Information</a></li>
-              <li><a href="#GetUserRoleInfo" title="Get Role Information">Get Role Information</a></li>
-              <li><a href="#SetUserRoleInfo" title="Set Role Information">Set Role Information</a></li>
-              <li><a href="#GetAllRoles" title="Get All Roles ">Get All Roles </a></li> --}}
             </ul>
           </li>
+          @else
+            @if($category->private==0)
+            <li>
+            <a href="#{{\App\Models\Post::getFirstChildSlug($category->id)}}"><h4 class="title"><b class="caret"></b>{{$category->title}}</h4></a>
+              <ul class="sub-menu">
+                @if(isset($category->post))
+                  @foreach($category->post as $k=>$post)
+                    @if($post->private==0)
+                    <li><a href="#{{$post->slug}}" title="{{$post->slug}}">
+                      {{$post->title}}
+                    </a></li>
+                    @endif
+                  @endforeach
+                @endif
+              </ul>
+            </li>
+            @endif
+          @endauth
         </ul>
         @endforeach
         {{-- <ul class="nav nav-pills nav-stacked">
@@ -107,59 +115,119 @@
     @foreach($categories as $category)
       @if(isset($category->post))
         @foreach($category->post as $k=>$post)
-          <div id="{{$post->slug}}" class="doc-content no-padding">
-            <div class="col-sm-5 description equal-item">
-                @if($k==0)
-                <h2 class="desc-title">{{$category->title}}</h2>
+          @auth
+            <div id="{{$post->slug}}" class="doc-content no-padding">
+              <div class="col-sm-5 description equal-item">
+                  @if($k==0)
+                  <h2 class="desc-title">{{$category->title}}</h2>
+                  @endif
+                  <h3 class="sub-title">
+                    {{$post->title}}
+                  </h3>
+                  <p>{!! $post->description !!}</p>
+              </div>
+              <div class="col-sm-7 docs equal-item">
+                @if(json_decode($post->tab_ids))
+                  @php($tabs = \App\Models\Tab::getTabs($post->tab_ids))
+                    <ul class="nav nav-tabs" role="tablist">
+                   
+                      @foreach($tabs as $key=>$tab)
+                        <li role="presentation" class="@if($key==0) active @endif"><a href="#post{{$post->id}}tab{{$tab->id}}" role="tab" data-toggle="tab">{{$tab->title}}</a></li>
+                      @endforeach
+                    
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      @foreach($tabs as $key=>$tab)
+                      @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
+                        <div role="tabpanel" class="tab-pane @if($key==0) active @endif" id="post{{$post->id}}tab{{$tab->id}}">
+                          @if($tab->type=='table')
+                            <table class="table table-striped table-responsive">
+                              <thead>
+                                <tr>
+                                  <th align="left">Parameter</th>
+                                  <th align="left">Description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                 @foreach($contents as $content)
+                                <tr>
+                                  <td class="notranslate" align="left">{{$content->parameter}}</td>
+                                  <td align="left">{{$content->description}}</td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table> 
+                          @endif
+                          @if($tab->type=='snippet')
+                            @foreach($contents as $content)
+                            <label>{{$content->title}}</label>
+                            <pre class="language-http copytoclipboard"><code>{{json_decode($content->snippet)}}</code></pre>
+                            @endforeach
+                          @endif
+                        </div>
+                      @endforeach
+                    </div>
                 @endif
-                <h3 class="sub-title">{{$post->title}}</h3>
-                <p>{!! $post->description !!}</p>
+              </div>
             </div>
-            <div class="col-sm-7 docs equal-item">
-              @if(json_decode($post->tab_ids))
-                @php($tabs = \App\Models\Tab::getTabs($post->tab_ids))
-                  <ul class="nav nav-tabs" role="tablist">
-                 
-                    @foreach($tabs as $key=>$tab)
-                      <li role="presentation" class="@if($key==0) active @endif"><a href="#post{{$post->id}}tab{{$tab->id}}" role="tab" data-toggle="tab">{{$tab->title}}</a></li>
-                    @endforeach
-                  
-                  </ul>
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    @foreach($tabs as $key=>$tab)
-                    @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
-                      <div role="tabpanel" class="tab-pane @if($key==0) active @endif" id="post{{$post->id}}tab{{$tab->id}}">
-                        @if($tab->type=='table')
-                          <table class="table table-striped table-responsive">
-                            <thead>
-                              <tr>
-                                <th align="left">Parameter</th>
-                                <th align="left">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                               @foreach($contents as $content)
-                              <tr>
-                                <td class="notranslate" align="left">{{$content->parameter}}</td>
-                                <td align="left">{{$content->description}}</td>
-                              </tr>
-                              @endforeach
-                            </tbody>
-                          </table> 
-                        @endif
-                        @if($tab->type=='snippet')
-                          @foreach($contents as $content)
-                          <label>{{$content->title}}</label>
-                          <pre class="language-http copytoclipboard"><code>{{json_decode($content->snippet)}}</code></pre>
-                          @endforeach
-                        @endif
-                      </div>
-                    @endforeach
-                  </div>
-              @endif
+          @else
+            @if($post->private==0)
+            <div id="{{$post->slug}}" class="doc-content no-padding">
+              <div class="col-sm-5 description equal-item">
+                  @if($k==0)
+                  <h2 class="desc-title">{{$category->title}}</h2>
+                  @endif
+                  <h3 class="sub-title">{{$post->title}}</h3>
+                  <p>{!! $post->description !!}</p>
+              </div>
+              <div class="col-sm-7 docs equal-item">
+                @if(json_decode($post->tab_ids))
+                  @php($tabs = \App\Models\Tab::getTabs($post->tab_ids))
+                    <ul class="nav nav-tabs" role="tablist">
+                   
+                      @foreach($tabs as $key=>$tab)
+                        <li role="presentation" class="@if($key==0) active @endif"><a href="#post{{$post->id}}tab{{$tab->id}}" role="tab" data-toggle="tab">{{$tab->title}}</a></li>
+                      @endforeach
+                    
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      @foreach($tabs as $key=>$tab)
+                      @php($contents = \App\Models\PostTab::getData($post->id, $tab->id))
+                        <div role="tabpanel" class="tab-pane @if($key==0) active @endif" id="post{{$post->id}}tab{{$tab->id}}">
+                          @if($tab->type=='table')
+                            <table class="table table-striped table-responsive">
+                              <thead>
+                                <tr>
+                                  <th align="left">Parameter</th>
+                                  <th align="left">Description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                 @foreach($contents as $content)
+                                <tr>
+                                  <td class="notranslate" align="left">{{$content->parameter}}</td>
+                                  <td align="left">{{$content->description}}</td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table> 
+                          @endif
+                          @if($tab->type=='snippet')
+                            @foreach($contents as $content)
+                            <label>{{$content->title}}</label>
+                            <pre class="language-http copytoclipboard"><code>{{json_decode($content->snippet)}}</code></pre>
+                            @endforeach
+                          @endif
+                        </div>
+                      @endforeach
+                    </div>
+                @endif
+              </div>
             </div>
-          </div>
+            @endif
+          @endauth
         @endforeach
       @endif
     @endforeach

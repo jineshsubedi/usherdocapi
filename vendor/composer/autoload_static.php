@@ -314,6 +314,8 @@ class ComposerStaticInitf9e070d63b2288242506d1194f52e8c7
     );
 
     public static $classMap = array (
+        'AlterCategoryTableMigration' => __DIR__ . '/../..' . '/database/migrations/2020_05_22_040629_alter_category_table_migration.php',
+        'AlterPostTableMigration' => __DIR__ . '/../..' . '/database/migrations/2020_05_22_040338_alter_post_table_migration.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -327,6 +329,7 @@ class ComposerStaticInitf9e070d63b2288242506d1194f52e8c7
         'App\\Http\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/PostController.php',
         'App\\Http\\Controllers\\TabController' => __DIR__ . '/../..' . '/app/Http/Controllers/TabController.php',
         'App\\Http\\Controllers\\TypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TypeController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -336,6 +339,7 @@ class ComposerStaticInitf9e070d63b2288242506d1194f52e8c7
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
+        'App\\Models\\PostTab' => __DIR__ . '/../..' . '/app/Models/PostTab.php',
         'App\\Models\\Tab' => __DIR__ . '/../..' . '/app/Models/Tab.php',
         'App\\Models\\Type' => __DIR__ . '/../..' . '/app/Models/Type.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -355,6 +359,7 @@ class ComposerStaticInitf9e070d63b2288242506d1194f52e8c7
         'Carbon\\Upgrade' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Upgrade.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2020_05_04_123501_create_categories_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePostTabsTable' => __DIR__ . '/../..' . '/database/migrations/2020_05_07_061717_create_post_tabs_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2020_05_05_033413_create_posts_table.php',
         'CreateTabsTable' => __DIR__ . '/../..' . '/database/migrations/2020_05_05_105859_create_tabs_table.php',
         'CreateTypesTable' => __DIR__ . '/../..' . '/database/migrations/2020_05_05_110050_create_types_table.php',

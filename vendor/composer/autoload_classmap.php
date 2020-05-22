@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterCategoryTableMigration' => $baseDir . '/database/migrations/2020_05_22_040629_alter_category_table_migration.php',
+    'AlterPostTableMigration' => $baseDir . '/database/migrations/2020_05_22_040338_alter_post_table_migration.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -19,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\PostController' => $baseDir . '/app/Http/Controllers/PostController.php',
     'App\\Http\\Controllers\\TabController' => $baseDir . '/app/Http/Controllers/TabController.php',
     'App\\Http\\Controllers\\TypeController' => $baseDir . '/app/Http/Controllers/TypeController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -28,6 +31,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
+    'App\\Models\\PostTab' => $baseDir . '/app/Models/PostTab.php',
     'App\\Models\\Tab' => $baseDir . '/app/Models/Tab.php',
     'App\\Models\\Type' => $baseDir . '/app/Models/Type.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
@@ -47,6 +51,7 @@ return array(
     'Carbon\\Upgrade' => $vendorDir . '/nesbot/carbon/src/Carbon/Upgrade.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2020_05_04_123501_create_categories_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePostTabsTable' => $baseDir . '/database/migrations/2020_05_07_061717_create_post_tabs_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2020_05_05_033413_create_posts_table.php',
     'CreateTabsTable' => $baseDir . '/database/migrations/2020_05_05_105859_create_tabs_table.php',
     'CreateTypesTable' => $baseDir . '/database/migrations/2020_05_05_110050_create_types_table.php',

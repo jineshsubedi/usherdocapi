@@ -78,8 +78,7 @@ class PostController extends Controller
             'category_id' => 'required|integer',
             'status'=>'required|in:active,inactive',
             'priority'=>'required|integer',
-            'description'=>'required'
-
+            'description'=>'required',
         ]);
         
         $slug=$this->category->getSlug($request->title);
@@ -91,7 +90,8 @@ class PostController extends Controller
             'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->category_id,
-            'tab_ids' => json_encode($request->tab_ids)
+            'tab_ids' => json_encode($request->tab_ids),
+            'private' => $request->privacy
         ];
         \App\Models\Post::create($data);
         request()->session()->flash('success','Post successfully added');
@@ -195,7 +195,8 @@ class PostController extends Controller
             'priority'=>$request->priority,
             'status' => $request->status,
             'cat_id' => $request->category_id,
-            'tab_ids' => json_encode($request->tab_ids)
+            'tab_ids' => json_encode($request->tab_ids),
+            'private' => $request->privacy
         ];
 
         $status = \App\Models\Post::find($id)->update($data);

@@ -30,9 +30,10 @@ Route::get('/','FrontendController@home')->name('home');
 
 // ----------------------Back-End Routes starts----------------------//
 
-Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
+Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
     Route::get('/','HomeController@admin')->name('admin');
     // Category section
+    Route::resource('/user','UserController');
     Route::resource('/category','CategoryController');
     // Posts section
     Route::resource('/post','PostController');

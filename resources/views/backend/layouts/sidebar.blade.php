@@ -13,6 +13,11 @@
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
+            @if(Auth::user()->role=='admin')
+            <li>
+                <a class="@if(request()->segment(2) == 'user') active @endif" href="{{route('user.index')}}"><i class="sidebar-item-icon fa fa-user"></i> <span class="nav-label">User Manager</span></a>
+            </li>
+            @endif
             <li>
                 <a class="@if(request()->segment(2) == 'category') active @endif" href="{{route('category.index')}}"><i class="sidebar-item-icon fa fa-sitemap"></i> <span class="nav-label">Category Manager</span></a>
             </li>

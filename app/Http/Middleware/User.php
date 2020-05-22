@@ -18,9 +18,5 @@ class User
         if($request->user()->role=='user'){
             return $next($request);
         }
-        else{
-            request()->session()->flash('error','You have no permission to access');
-            return redirect()->route($request->user()->role);
-        }
     }
 }

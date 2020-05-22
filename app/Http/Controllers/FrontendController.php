@@ -11,9 +11,9 @@ class FrontendController extends Controller
         $this->category=$category;
     }
     public function home(){
-        // $all_category=$this->category->getCategoryWithAttr();
-        // dd($all_category);
+        
         $all_category = Category::where('status', 'active')->orderBy('priority','ASC')->with('post')->get();
+
         return view('frontend.index')->with('categories',$all_category);
     }
 }

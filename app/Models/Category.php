@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable=['title','slug','status','priority'];
+    protected $fillable=['title','slug','status','priority', 'private'];
 
     public function getRules(){
         return[

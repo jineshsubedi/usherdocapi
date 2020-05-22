@@ -87,9 +87,17 @@
                         <select name="status" class="form-control">
                             <option value="active" {{($post_data->status=='active') ? 'selected' : ''}}>active</option>
                             <option value="inactive" {{($post_data->status=='inactive') ? 'selected' : ''}}>inactive</option>
-    
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="status">Privacy <sup style="color:red;">*</sup></label>
+                        <select name="privacy" class="form-control">
+                            <option value="0" {{($post_data->private=='0') ? 'selected' : ''}}>Public</option>
+                            <option value="1" {{($post_data->private=='1') ? 'selected' : ''}}>Private</option>
+                        </select>
+                    </div>
+
                     <button type="reset" class="btn btn-info">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                     <a href="{{url('admin/post')}}" class="btn btn-danger">Cancel</a>
