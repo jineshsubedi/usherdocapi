@@ -33,7 +33,15 @@ class LoginController extends Controller
      * @return void
      */
 
-     public function credentials(Request $request){
+    protected function authenticated(Request $request, $user)
+    {
+        if ( $user->role == 'user' ) {
+            return redirect('/');
+        }
+        return redirect('/home');
+    }
+
+    public function credentials(Request $request){
          return ['email'=>$request->email,'password'=>$request->password,'status'=>'active'];
      }
     public function __construct()

@@ -26,6 +26,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Status</th>
+                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -36,6 +37,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{ucwords($user->status)}}</td>
+                                        <td>{{ucwords($user->role)}}</td>
                                         <td>
                                             <form class="float-left" action="{{route('user.destroy',$user->id)}}" method="POST" onsubmit="return confirm('Are your sure?')">
                                                 {{csrf_field()}}

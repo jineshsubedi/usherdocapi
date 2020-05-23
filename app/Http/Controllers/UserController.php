@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
     }
     public function index()
     {
-    	$users = User::where('role', '!=', 'admin')->orderBy('name')->paginate(20);
+    	$users = User::where('id', '!=', Auth::user()->id)->orderBy('name')->paginate(20);
     	return view('backend.user.index')->with('users',$users);
     }
 
@@ -28,13 +29,15 @@ class UserController extends Controller
     		'name' => 'required',
     		'email' => 'required',
     		'password' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'role' => 'required'
     	]);
     	$data = [
     		'name' => $request->name,
     		'email' => $request->email,
     		'password' => bcrypt($request->password),
-    		'status' => $request->status
+            'status' => $request->status,
+    		'role' => $request->role,
     	];
     	User::create($data);
     	request()->session()->flash('success','User successfully added');
@@ -58,7 +61,8 @@ class UserController extends Controller
     		'name' => 'required',
     		'email' => 'required',
     		'password' => 'sometimes',
-            'status' => ''
+            'status' => 'required',
+            'role' => 'required'
     	]);
     	$user = User::find($id);
     	if(!$user)
@@ -75,7 +79,8 @@ class UserController extends Controller
     		'name' => $request->name,
     		'email' => $request->email,
     		'password' => $password,
-            'status' => $request->status
+            'status' => $request->status,
+            'role' => $request->role,
     	];
     	User::find($id)->update($data);
     	request()->session()->flash('success','User successfully updated');

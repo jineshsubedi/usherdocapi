@@ -1,6 +1,6 @@
 <header class="header">
     <div class="page-brand">
-        <a class="link" href="{{route('admin')}}">
+        <a class="link" href="{{url('/')}}">
             <span class="brand">{{env('app_name')}}
                 {{-- <span class="brand-tip">CROZA</span> --}}
             </span>
