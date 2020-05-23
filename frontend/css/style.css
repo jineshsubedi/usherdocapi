@@ -312,6 +312,46 @@ body.nav-opened .doc-content {
   margin-right: 8px;
 }
 
+.api-search-wrapper {
+  position: relative;
+}
+
+.api-search-wrapper .search-dropdown{
+  position: absolute;
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #dde2fd;
+  border-radius: 12px;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+  display: none;
+}
+.api-search-wrapper.active .search-dropdown{
+  display: block;
+}
+.api-search-wrapper a{
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+}
+.api-search-wrapper a:last-child {
+  border-radius: 0;
+}
+
+.api-search-wrapper h3{
+  margin: 0;
+  font-size: 20px;
+}
+.api-search-wrapper h4{
+  font-size: 16px;
+  margin: 8px 0;
+}
+.api-search-wrapper p{
+  color: #666;
+  margin-bottom: 0;
+}
+
 @media(max-width: 992px){
   .mobile-sticky-header {
       width: 100%;
