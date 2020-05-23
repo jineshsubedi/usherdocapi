@@ -150,9 +150,13 @@
             <div id="{{$post->slug}}" class="doc-content no-padding">
               <div class="col-sm-5 description equal-item">
                   @if($k==0)
-                  <h2 class="desc-title">{{$category->title}}</h2>
+                  <h2 class="desc-title">
+                  <span class="private-label"><img width="12" src="frontend/images/private.svg" /></span>
+                    {{$category->title}}
+                  </h2>
                   @endif
                   <h3 class="sub-title">
+                  <span class="private-label"><img width="10" src="frontend/images/private.svg" /></span>
                     {{$post->title}}
                   </h3>
                   <p>{!! $post->description !!}</p>
