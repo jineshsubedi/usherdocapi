@@ -290,6 +290,28 @@ body.nav-opened .doc-content {
   color: #fff;
 }
 
+.doc-content .description .disc-title .private-label {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  background: orange;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.doc-content .description .sub-title .private-label {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  background: orange;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
 @media(max-width: 992px){
   .mobile-sticky-header {
       width: 100%;
