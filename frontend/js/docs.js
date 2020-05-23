@@ -40,3 +40,18 @@ $(function(){
 		$('body').removeClass('nav-opened');
 	})
 })
+
+$(function(){
+	$('#apiSearch').bind('blur', function () {
+        $(this).parent('.api-search-wrapper').removeClass("active");
+    });
+
+    $('#apiSearch').bind('focus', function () {
+        $(this).parent('.api-search-wrapper').addClass("active");
+    });
+    
+    $('#apiSearchDropdown a').bind('click', function () {
+        $('#apiSearchDropdown').parent('.api-search-wrapper').removeClass("active");
+    });
+    
+})
