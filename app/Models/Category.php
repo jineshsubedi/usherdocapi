@@ -49,4 +49,9 @@ class Category extends Model
         }
         return 0;
     }
+    public static function getTitle($id)
+    {
+        $data = Category::find($id);
+        return $data->title;
+    }
 }

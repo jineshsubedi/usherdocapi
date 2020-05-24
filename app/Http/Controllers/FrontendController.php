@@ -34,7 +34,16 @@ class FrontendController extends Controller
         
         foreach ($queries as $query)
         {
-            $results[] = [ 'id' => $query->id, 'value' => $query->title, 'slug' => $query->slug ];
+            $category = \App\Models\Category::getTitle($query->cat_id);
+            $description = substr($query->description, 100);
+            $htmlView = '<h3>'.$category.'</h3><h4>'.$query->title.'</h4><p>'.$description.'</p>';
+            $results[] = [ 
+                'id' => $query->id,
+                'value' => $query->title, 
+                'category' => $category,
+                'slug' => $query->slug, 
+                'description' => $query->description
+            ];
         }
         return response()->json($results);
     }
