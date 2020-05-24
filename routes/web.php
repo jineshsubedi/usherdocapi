@@ -56,6 +56,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
     Route::post('/postTabManager/save', 'PostController@postTabManager')->name('postTabManager.save');
 });
 
-Route::get('/search', 'FrontendController@search')->name('front.search');
+Route::post('/search', 'FrontendController@search')->name('front.search');
 
 // ----------------------Back End Routes ends----------------------//

@@ -113,8 +113,14 @@
     <!-- Introduction starts -->
     <div id="introduction" class="doc-content no-padding row-introduction">
     <header class="sticky-header">
-            <!-- <div>
-              <input type="search" id="searchPost" placeholder="Search API" class="form-control search-input">
+            <!-- <div class="api-search-wrapper">
+                  <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
+                  <div id="apiSearchDropdown" class="search-dropdown">
+                      <div style="padding: 1.5rem; text-align: center;">
+                          <h3>Nothing found</h3>
+                          <p>No result found for your search term</p>
+                      </div>
+                  </div>
             </div> -->
             <div class="api-search-wrapper">
                   <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
@@ -191,12 +197,20 @@
               <div class="col-sm-5 description equal-item">
                   @if($k==0)
                   <h2 class="desc-title">
+                  @if($category->private == 1)
                   <span class="private-label"><img width="12" src="frontend/images/private.svg" /></span>
+                  @else
+                  {{-- public icon --}}
+                  @endif
                     {{$category->title}}
                   </h2>
                   @endif
                   <h3 class="sub-title">
+                  @if($post->private == 1)
                   <span class="private-label"><img width="10" src="frontend/images/private.svg" /></span>
+                  @else
+                  {{-- public icon --}}
+                  @endif
                     {{$post->title}}
                   </h3>
                   <p>{!! $post->description !!}</p>
@@ -310,7 +324,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="{{asset('backend/assets/vendors/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
+    {{-- <script>
       $('#searchPost').autocomplete({
         source: '{{ route("front.search") }}',
         minlength:1,
@@ -321,7 +335,44 @@
           var url = '{{url('')}}';
           url += '/#'+slug;
           location = url;
+        },
+        html: true,
+      })
+    </script> --}}
+    <script>
+      var token = $('input[name=\'_token\']').val();
+      $('#apiSearch').keyup(function(){
+        var term = $('#apiSearch').val();
+        $.ajax({
+        url: "{{route('front.search')}}",
+        type: 'POST',
+        data:{
+            _token: token,
+            term: term,
+        },
+        dataType: 'JSON',
+        success:function(data){
+          console.log(data)
+          $('#apiSearchDropdown').html('');
+          var htmlList = '';
+          $.each(data, function(index, myValue){
+            htmlList += '<a href="#'+myValue.slug+'"><h3>'+myValue.category+'</h3><h4>'+myValue.value+'</h4><p>'+myValue.description.substring(0,100)+'</p></a>';
+          })
+          $('#apiSearchDropdown').append(htmlList);
+        },
+        error: function(error){
+          alert('failed')
         }
       })
+      })
+      function reloadUrl(slug)
+      {
+        alert(slug)
+        var url = '{{url('')}}';
+        if(slug != ''){
+          url += '/#'+slug
+          location = url
+        }
+      }
     </script>
 @endsection
