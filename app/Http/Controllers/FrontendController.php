@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Hash;
 use Illuminate\Http\Request;
 use App\Models\Category;
 class FrontendController extends Controller

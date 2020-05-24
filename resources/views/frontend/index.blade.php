@@ -206,7 +206,7 @@
                   </h2>
                   @endif
                   <h3 class="sub-title">
-                  @if($post->private == 1)
+                  @if($post->private == 1 || $category->private == 1)
                   <span class="private-label"><img width="10" src="frontend/images/private.svg" /></span>
                   @else
                   {{-- public icon --}}
@@ -345,7 +345,7 @@
         var term = $('#apiSearch').val();
         $.ajax({
         url: "{{route('front.search')}}",
-        type: 'POST',
+        type: 'get',
         data:{
             _token: token,
             term: term,
@@ -355,13 +355,19 @@
           console.log(data)
           $('#apiSearchDropdown').html('');
           var htmlList = '';
-          $.each(data, function(index, myValue){
-            htmlList += '<a href="#'+myValue.slug+'"><h3>'+myValue.category+'</h3><h4>'+myValue.value+'</h4><p>'+myValue.description.substring(0,100)+'</p></a>';
-          })
+          if(data.length > 0){
+            $.each(data, function(index, myValue){
+              htmlList += '<a href="#'+myValue.slug+'"><h3>'+myValue.category+'</h3><h4>'+myValue.value+'</h4><p>'+myValue.description.substring(0,100)+'</p></a>';
+            })
+          }else{
+            htmlList += '<div style="padding: 1.5rem; text-align: center;"><h3>Nothing found</h3><p>No result found for your search term</p></div>';
+          }
+            
           $('#apiSearchDropdown').append(htmlList);
         },
         error: function(error){
           alert('failed')
+          console.log(error)
         }
       })
       })

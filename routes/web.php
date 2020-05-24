@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/','FrontendController@home')->name('home');
 
+Route::get('/frontpage/search', 'FrontendController@search')->name('front.search');
+
 // ----------------------Front-End Routes ends----------------------//
 
 
@@ -56,6 +58,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function(){
     Route::post('/postTabManager/save', 'PostController@postTabManager')->name('postTabManager.save');
 });
 
-Route::post('/search', 'FrontendController@search')->name('front.search');
+
 
 // ----------------------Back End Routes ends----------------------//
