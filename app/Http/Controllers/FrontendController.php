@@ -22,12 +22,12 @@ class FrontendController extends Controller
     {
     	$results = array();
         $term = $request->term;
-        $queries = \App\Models\Post::where('title', 'LIKE', $term.'%')->where('status', 'active');
+        $queries = \App\Models\Post::leftjoin('categories', 'posts.cat_id','categories.id')->where('posts.title', 'LIKE', $term.'%')->where('posts.status', 'active');
                             // ->select('title')
         if(!Auth::user()){
-        	$queries = $queries->where('private', 0);
+        	$queries = $queries->where('posts.private', 0)->where('categories.private', 0);
         }
-        $queries = $queries->groupBy('title')
+        $queries = $queries->select('posts.*')->groupBy('posts.title')
                             ->take(10)
                             ->get();
         
