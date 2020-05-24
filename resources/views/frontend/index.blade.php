@@ -113,10 +113,7 @@
     <!-- Introduction starts -->
     <div id="introduction" class="doc-content no-padding row-introduction">
     <header class="sticky-header">
-            <div>
-              {{-- <input type="search" id="searchPost" placeholder="Search API" class="form-control search-input"> --}}
-            </div>
-            <div class="api-search-wrapper">
+            <!-- <div class="api-search-wrapper">
                   <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
                   <div id="apiSearchDropdown" class="search-dropdown">
                       <div style="padding: 1.5rem; text-align: center;">
@@ -124,7 +121,47 @@
                           <p>No result found for your search term</p>
                       </div>
                   </div>
-            </div>
+            </div> -->
+            <div class="api-search-wrapper">
+                  <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
+                  <div id="apiSearchDropdown" class="search-dropdown">
+                     
+                      <a href="#initiate-any-campaign">
+                          <h3>USHER Engagement</h3>
+                          <h4>Initiate Any Campaign</h4>
+                          <p>This API is to initiate an Ushur (also called as Campaign) to a specific phone number...</p>
+                      </a>
+                      
+                      <a href="#add-or-update-enterprise-data-on-ushur">
+                          <h3>Account OPS</h3>
+                          <h4>Get DoNotDisturb Status Settings</h4>
+                          <p>This is the API that would be required</p>
+                      </a>
+                      
+                      <a href="#brazil">
+                          <h3>Account OPS</h3>
+                          <h4>Get DoNotDisturb Status Settings</h4>
+                          <p>This is the API that would be required to renew the token which...</p>
+                      </a>
+                      
+                      <a href="#">
+                          <h3>Account OPS</h3>
+                          <h4>Get DoNotDisturb Status Settings</h4>
+                          <p>This is the API that would be required to renew the...</p>
+                      </a>
+                      
+                      <a href="#">
+                          <h3>Account OPS</h3>
+                          <h4>Get DoNotDisturb Status Settings</h4>
+                          <p>This is the API that would be required to renew the...</p>
+                      </a>
+                    
+                      <div style="padding: 1.5rem; text-align: center;">
+                          <h3>Nothing found</h3>
+                          <p>No result found for your search term</p>
+                      </div>
+                  </div>
+              </div>
             @auth
               {{-- <a class="btn btn-default auth-btn" href="{{route('logout')}}">Log out</a> --}}
               <a class="btn btn-default auth-btn" href="{{ route('logout') }}"

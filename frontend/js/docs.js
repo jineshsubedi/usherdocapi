@@ -42,16 +42,22 @@ $(function(){
 })
 
 $(function(){
-	$('#apiSearch').bind('blur', function () {
-        $(this).parent('.api-search-wrapper').removeClass("active");
-    });
 
     $('#apiSearch').bind('focus', function () {
         $(this).parent('.api-search-wrapper').addClass("active");
     });
     
-    $('#apiSearchDropdown a').bind('click', function () {
+    
+    $('#apiSearchDropdown a').on('click', function () {
+        $(this).parent().parent('.api-search-wrapper').removeClass("active");
+    });
+    
+    $('html').click(function(){
         $('#apiSearchDropdown').parent('.api-search-wrapper').removeClass("active");
+    });
+    
+    $('#apiSearch').click(function(event){
+        event.stopPropagation();
     });
     
 })
