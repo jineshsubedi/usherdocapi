@@ -113,7 +113,7 @@
     <!-- Introduction starts -->
     <div id="introduction" class="doc-content no-padding row-introduction">
     <header class="sticky-header">
-            <!-- <div class="api-search-wrapper">
+            <div class="api-search-wrapper">
                   <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
                   <div id="apiSearchDropdown" class="search-dropdown">
                       <div style="padding: 1.5rem; text-align: center;">
@@ -121,8 +121,8 @@
                           <p>No result found for your search term</p>
                       </div>
                   </div>
-            </div> -->
-            <div class="api-search-wrapper">
+            </div>
+            <!-- <div class="api-search-wrapper">
                   <input type="text" id="apiSearch" placeholder="Search APIs" class="form-control search-input" />
                   <div id="apiSearchDropdown" class="search-dropdown">
                      
@@ -161,7 +161,7 @@
                           <p>No result found for your search term</p>
                       </div>
                   </div>
-              </div>
+              </div> -->
             @auth
               {{-- <a class="btn btn-default auth-btn" href="{{route('logout')}}">Log out</a> --}}
               <a class="btn btn-default auth-btn" href="{{ route('logout') }}"

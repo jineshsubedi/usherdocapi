@@ -290,7 +290,7 @@ body.nav-opened .doc-content {
   color: #fff;
 }
 
-.doc-content .description .disc-title .private-label {
+.doc-content .desc-title .private-label {
   display: inline-flex;
   width: 36px;
   height: 36px;
@@ -301,7 +301,7 @@ body.nav-opened .doc-content {
   margin-right: 8px;
 }
 
-.doc-content .description .sub-title .private-label {
+.doc-content .sub-title .private-label {
   display: inline-flex;
   width: 30px;
   height: 30px;
