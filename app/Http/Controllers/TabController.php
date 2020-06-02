@@ -82,7 +82,7 @@ class TabController extends Controller
      */
     public function edit($id)
     {
-        $this->tab=$this->tab->find($id);
+        $this->tab=$this->tab->findOrFail($id);
         if(!$this->tab){
             request()->session()->flash('error','tab not found');
             return redirect()->route('tab.index');
@@ -106,7 +106,7 @@ class TabController extends Controller
             'priority' => 'required|integer'
         ]);
         
-        $this->tab=$this->tab->find($id);
+        $this->tab=$this->tab->findOrFail($id);
         if(!$this->tab){
             request()->session()->flash('error','tab not found');
             return redirect()->route('tab.index');
@@ -141,7 +141,7 @@ class TabController extends Controller
      */
     public function destroy($id)
     {
-        $this->tab=$this->tab->find($id);
+        $this->tab=$this->tab->findOrFail($id);
         if(!$this->tab){
             request()->session()->flash('error','tab not found');
             return redirect()->route('tab.index');
@@ -158,7 +158,7 @@ class TabController extends Controller
 
     public function ajaxTab(Request $request)
     {
-        $tab = \App\Models\Tab::find($request->id);
+        $tab = \App\Models\Tab::findOrFail($request->id);
         return $tab->type;
     }
 }

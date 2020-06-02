@@ -118,7 +118,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = \App\Models\Post::find($id);
+        $post = \App\Models\Post::findOrFail($id);
         if(json_decode($post->tab_ids))
         {
             $tab_ids = json_decode($post->tab_ids);
@@ -139,7 +139,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $this->post=$this->post->find($id);
+        $this->post=$this->post->findOrFail($id);
         if(!$this->post){
             request()->session()->flash('error','Post not found');
             return redirect()->route('post.index');
@@ -199,7 +199,7 @@ class PostController extends Controller
             'private' => $request->privacy
         ];
 
-        $status = \App\Models\Post::find($id)->update($data);
+        $status = \App\Models\Post::findOrFail($id)->update($data);
         if($status){
             request()->session()->flash('success','Post successfully updated');
         }
@@ -217,7 +217,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $this->post=$this->post->find($id);
+        $this->post=$this->post->findOrFail($id);
         if(!$this->post){
             request()->session()->flash('error','Post not found');
             return redirect()->route('post.index');
@@ -261,7 +261,7 @@ class PostController extends Controller
 
     public function getTabType(Request $request){
         // dd($request->title);
-        $this->tab=$this->tab->find($request->id);
+        $this->tab=$this->tab->findOrFail($request->id);
         if(!$this->tab){
             return response()->json(['status'=>false,'msg'=>'tab not found','data'=>null]);
         }
@@ -291,7 +291,7 @@ class PostController extends Controller
         return redirect()->back();
     }
     public function postDelete($id){
-        $this->posttab=$this->posttab->find($id);
+        $this->posttab=$this->posttab->findOrFail($id);
         if(!$this->posttab){
             request()->session()->flash('error','Not found');
             return redirect()->back();
@@ -316,7 +316,7 @@ class PostController extends Controller
             'title' => $request->title,
             'snippet' => json_encode($request->snippet),
         ];
-        \App\Models\PostTab::find($id)->update($data);
+        \App\Models\PostTab::findOrFail($id)->update($data);
         request()->session()->flash('success','Successfully Updated');
         return redirect()->back();
     }

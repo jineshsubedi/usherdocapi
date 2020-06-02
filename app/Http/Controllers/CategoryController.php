@@ -86,7 +86,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $this->category=$this->category->find($id);
+        $this->category=$this->category->findOrFail($id);
         if(!$this->category){
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
@@ -111,7 +111,7 @@ class CategoryController extends Controller
             'priority'=>'required|integer',
             'status'=>'required|in:active,inactive'
         ]);
-        $this->category=$this->category->find($id);
+        $this->category=$this->category->findOrFail($id);
         if(!$this->category){
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
@@ -122,7 +122,7 @@ class CategoryController extends Controller
             'status' => $request->status,
             'private' => $request->privacy
         ];
-        $status=Category::find($id)->update($data);
+        $status=Category::findOrFail($id)->update($data);
         if($status){
             request()->session()->flash('success','Category successfully updated');
         }
@@ -140,7 +140,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->category=$this->category->find($id);
+        $this->category=$this->category->findOrFail($id);
         if(!$this->category){
             request()->session()->flash('error','Category not found');
             return redirect()->route('category.index');
@@ -157,7 +157,7 @@ class CategoryController extends Controller
 
     public function getChildByParent(Request $request){
         // dd($request->all());
-        $this->category=$this->category->find($request->id);
+        $this->category=$this->category->findOrFail($request->id);
         if(!$this->category){
             return response()->json(['status'=>false,'msg'=>'Category not found','data'=>null]);
         }
