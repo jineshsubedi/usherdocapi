@@ -20,7 +20,7 @@ class Post extends Model
         return $this->hasOne('App\Models\Category','id','cat_id')->where('status', 'active');
     }
     public function getAllPost(){
-        return $this->with('cat_info')->orderBy('cat_id','asc')->paginate(50);
+        return $this->with('cat_info')->orderBy('cat_id','asc')->paginate(100);
     }
     public static function getFirstChildSlug($cat_id)
     {
